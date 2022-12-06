@@ -1,9 +1,11 @@
 import { useFetch } from "../utilities/useFetch";
 import PokemonList from "./PokemonList";
+import { useGlobalContext } from "../utilities/useGlobalContext";
 
 const pokemonUrl = "https://pokeapi.co/api/v2/pokemon";
 
 const PokemonScreen = () => {
+  const { onLogout } = useGlobalContext();
   const { pokemonData, isLoading } = useFetch(pokemonUrl);
   console.log(pokemonData);
   const checkIfLoading = () => {
@@ -53,6 +55,7 @@ const PokemonScreen = () => {
         <div style={{ display: "flex", justifyContent: "center" }}>
           <h4>{pokemonData.count}</h4>
         </div>
+        <button onClick={onLogout}>Log Out</button>
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export const GlobalContext = React.createContext();
 
-const LoginContext = ({ children }) => {
+const LoginContext = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -13,10 +13,10 @@ const LoginContext = ({ children }) => {
     }
   }, []);
 
-  /*  const logoutHandler = () => {
+  const logoutHandler = () => {
     localStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
-  }; */
+  };
 
   const loginHandler = () => {
     localStorage.setItem("isLoggedIn", "1");
@@ -26,11 +26,11 @@ const LoginContext = ({ children }) => {
     <GlobalContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
-        /* onLogout: logoutHandler, */
+        onLogout: logoutHandler,
         onLogin: loginHandler,
       }}
     >
-      {children}
+      {props.children}
     </GlobalContext.Provider>
   );
 };
